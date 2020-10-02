@@ -1,0 +1,40 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "tubuntu/multi-client",
+			"hostname": "client",
+			"essential": false,
+			"memory": 128
+		},
+		{
+			"name": "server",
+			"image": "tubuntu/multi-server",
+			"hostname": "api",
+			"essential": false,
+			"memory": 128
+		},
+		{
+			"name": "server",
+		        "image": "tubuntu/multi-worker",
+		        "hostname": "woker",
+		        "essential": false,
+			"memory": 128
+		},
+		{
+			"name": "nginx",
+			"image": "tubuntu/multi-nginx",
+			"hostname": "nginx",
+			"essential": true,
+			"portMappings": [
+				{
+				 "hostPort": 80,
+				 "containerPort": 80
+				}
+			],
+			"links": ["client", "server"],
+			"memory": 128
+		}
+	]
+}
